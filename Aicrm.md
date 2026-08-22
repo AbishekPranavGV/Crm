@@ -736,3 +736,239 @@ Think like a production CRM architect, not just a programmer.
 
 When you generate code, provide the complete files rather than fragments.
 """
+
+
+
+If Price Intelligence is now completed, the next step for an import/export company should not be another isolated dashboard. You should move from Product → Price → Sales/Trade workflow.
+
+For your CRM, I would build in this order:
+
+Recommended next sequence
+
+Priority	Module	What it does
+
+1	🥇 Buyer / Supplier Master	Store importers, exporters, suppliers, contacts, countries
+2	🥈 Quotation / RFQ	Convert product + price into a professional quotation
+3	🥉 Document Management	Product PDFs, certificates, invoices, packing lists, etc.
+4	Lead / Customer CRM	Track prospects from first contact → order
+5	Communication Automation	Exact template + exact files + Gmail/WhatsApp
+6	Export Order Management	PO → confirmation → production/procurement → shipment
+7	Shipment Tracking	ETD, ETA, BL/AWB, container, forwarder
+8	Trade Compliance	HS code, country, Incoterms, documentation
+9	Purchase / Supplier Management	Supplier quotation → purchase order → procurement
+10	Finance	Invoice, payment, advance, balance, currency
+11	Analytics	Sales, margin, country, product, supplier and shipment dashboards
+
+
+new22/08/2026
+You already have:
+
+PRODUCT
+   ↓
+PRICE
+
+Now you need:
+
+PRODUCT
+   ↓
+PRICE
+   ↓
+BUYER / SUPPLIER
+   ↓
+QUOTATION
+   ↓
+COMMUNICATION
+   ↓
+ORDER
+   ↓
+SHIPMENT
+   ↓
+PAYMENT
+
+1. Buyer Master
+
+Create:
+
+Buyer_ID
+Company_Name
+Contact_Name
+Designation
+Email
+WhatsApp
+Phone
+Country
+State
+City
+Website
+Buyer_Type
+Industry
+Product_Interest
+Preferred_Currency
+Payment_Terms
+Incoterms
+Lead_Source
+Lead_Status
+Assigned_To
+Last_Contact
+Next_Followup
+Notes
+
+Your AI can eventually extract these from:
+
+Email signatures
+
+Incoming emails
+
+PDFs
+
+business cards
+
+websites
+
+enquiry documents
+
+
+
+---
+
+2. Supplier Master
+
+For the import side:
+
+Supplier_ID
+Company_Name
+Contact_Name
+Country
+Email
+Phone
+WhatsApp
+Products
+MOQ
+Currency
+Payment_Terms
+Lead_Time
+Incoterms
+Certifications
+Documents
+Supplier_Status
+Rating
+Notes
+
+This gives you a proper two-sided trade CRM:
+
+COMPANY
+                    │
+          ┌─────────┴─────────┐
+          │                   │
+       SUPPLIERS            BUYERS
+          │                   │
+      IMPORT SIDE          EXPORT SIDE
+          │                   │
+          └────── PRODUCTS ──┘
+                    │
+                  PRICE
+                    │
+               QUOTATION
+                    │
+              COMMUNICATION
+                    │
+                  ORDER
+
+Then build RFQ → Quotation
+
+This is probably the highest-value automation after Buyer/Supplier Master.
+
+Example:
+
+Buyer sends:
+
+> "Please quote 500 units of X100."
+
+
+
+Your system should do:
+
+Incoming Gmail
+      ↓
+NLP
+      ↓
+Extract:
+Product = X100
+Quantity = 500
+Destination = UAE
+      ↓
+Match Product Master
+      ↓
+Get latest price
+      ↓
+Calculate:
+Product cost
++ freight
++ insurance
++ margin
++ other charges
+      ↓
+Quotation
+      ↓
+PDF
+      ↓
+Preview
+      ↓
+Select Gmail account
+      ↓
+Send
+
+That turns your CRM from a database into an actual trade automation system.
+
+Your next milestone
+
+I'd therefore define your next project as:
+
+> AI-Powered Buyer/Supplier + RFQ & Quotation Management
+
+
+
+And your overall architecture becomes:
+
+AI IMPORT/EXPORT CRM
+                           │
+       ┌───────────────────┼───────────────────┐
+       │                   │                   │
+   PRODUCT MASTER      BUYER MASTER       SUPPLIER MASTER
+       │                   │                   │
+       └───────────────┬───┴───────────────────┘
+                       │
+                 PRICE INTELLIGENCE
+                       │
+                       ▼
+                 RFQ / ENQUIRY
+                       │
+                       ▼
+                  QUOTATION
+                       │
+                       ▼
+              COMMUNICATION CRM
+                       │
+              ┌────────┴────────┐
+              ▼                 ▼
+            Gmail            WhatsApp
+              │                 │
+              └────────┬────────┘
+                       ▼
+                     ORDER
+                       │
+              ┌────────┴────────┐
+              ▼                 ▼
+          PROCUREMENT        EXPORT
+              │                 │
+              └────────┬────────┘
+                       ▼
+                    SHIPMENT
+                       │
+                       ▼
+                    PAYMENT
+                       │
+                       ▼
+                  DASHBOARD
+
+If you're doing this as your AI Prompt Engineer training project, I would make Buyer/Supplier Master your next module, followed immediately by RFQ → Quotation. That gives you a much stronger business-use case than simply adding more product dashboards.
