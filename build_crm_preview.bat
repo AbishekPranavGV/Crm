@@ -1,4 +1,11 @@
 @echo off
+net use Z:"\\ServerName\SharedFolderName" /persistent:no
+::Your actual data fetchig code goesbelow this line
+
+
+
+
+@echo off
 setlocal
 set "ROOT=%~dp0CRM_AI_Product_Intelligence"
 if not exist "%ROOT%" mkdir "%ROOT%"
