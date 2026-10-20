@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enterprise AI CRM Skill Bundle · Principal AI Live Runner</title>
+  <title>Enterprise AI CRM Skill Bundle</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    
     :root {
       --bg: #090d16;
       --card-bg: #111827;
@@ -18,7 +19,7 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
@@ -26,8 +27,6 @@
       min-height: 100vh;
     }
     .container { max-width: 1080px; margin: 0 auto; }
-    
-    /* Top Bar */
     .topbar {
       display: flex;
       justify-content: space-between;
@@ -62,7 +61,13 @@
       background: var(--card-bg);
       color: #cbd5e1;
     }
-    .nav-btn:hover { background: #1e293b; color: #fff; border-color: #3b82f6; }
+    .nav-btn:hover { background: #1e293b; color: #fff; border-color: var(--accent); }
+    .nav-btn-vercel {
+      background: #000;
+      color: #fff;
+      border: 1px solid #333;
+    }
+    .nav-btn-vercel:hover { background: #111; border-color: #fff; }
     .nav-btn-primary {
       background: var(--accent);
       color: #090d16;
@@ -70,7 +75,6 @@
     }
     .nav-btn-primary:hover { opacity: 0.9; color: #000; }
 
-    /* Header */
     header { text-align: center; margin-bottom: 2.25rem; }
     .badge {
       display: inline-flex;
@@ -102,22 +106,45 @@
     h1 { font-size: 2.3rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
     p.lead { font-size: 1.05rem; color: var(--text-muted); max-width: 800px; margin: 0 auto; }
 
-    /* Interactive Control & Execution Console */
-    .console-panel {
+    .app-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 16px;
-      padding: 1.5rem;
+      padding: 1.75rem;
       margin-bottom: 2rem;
       box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
     }
-    .controls-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 1.5rem;
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
     }
-    .control-group label {
+    
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      background: var(--accent);
+      color: #090d16;
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+    }
+    .btn-action:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn-action:active { transform: translateY(1px); }
+    
+    .form-label {
       display: block;
       font-size: 0.8rem;
       font-weight: 700;
@@ -126,159 +153,21 @@
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
-    .control-select {
+    .form-input, .form-select, .form-textarea {
       width: 100%;
       background: #0d131f;
       border: 1px solid var(--card-border);
       color: #f1f5f9;
       font-family: inherit;
-      font-size: 0.9rem;
-      padding: 0.65rem 0.9rem;
+      font-size: 0.92rem;
+      padding: 0.7rem 0.9rem;
       border-radius: 8px;
       outline: none;
       transition: border-color 0.2s;
     }
-    .control-select:focus { border-color: var(--accent); }
-    
-    .action-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid var(--card-border);
-    }
-    .run-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      background: var(--accent);
-      color: #090d16;
-      font-family: inherit;
-      font-weight: 800;
-      font-size: 1.05rem;
-      padding: 0.8rem 1.8rem;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
-    }
-    .run-btn:hover { transform: translateY(-1px); filter: brightness(1.1); }
-    .run-btn:active { transform: translateY(1px); }
-    .run-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-    
-    .execution-status {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: #34d399;
-    }
-    .status-dot {
-      width: 9px;
-      height: 9px;
-      background: #34d399;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #34d399;
-    }
-
-    /* Progress Bar */
-    .progress-bar-container {
-      width: 100%;
-      height: 6px;
-      background: #1e293b;
-      border-radius: 9999px;
-      overflow: hidden;
-      margin: 1.25rem 0 1rem 0;
-      display: none;
-    }
-    .progress-bar-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--accent), #38bdf8);
-      border-radius: 9999px;
-      transition: width 0.15s ease-out;
-    }
-
-    /* Live Telemetry Terminal */
-    .terminal-box {
-      background: #060910;
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 1.2rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      color: #38bdf8;
-      max-height: 190px;
-      overflow-y: auto;
-      margin-top: 1rem;
-    }
-    .log-line {
-      margin-bottom: 0.35rem;
-      opacity: 0;
-      animation: fadeIn 0.25s forwards;
-    }
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-    .log-time { color: #64748b; font-size: 0.75rem; margin-right: 0.5rem; }
-    .log-ok { color: #34d399; }
-    .log-val { color: #fbbf24; }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent); }
 
     /* Result Preview Section */
-    .result-section {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 1.75rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
-    }
-    .result-header {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 1.25rem;
-    }
-    .result-title {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .tab-pills {
-      display: flex;
-      background: #0d131f;
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      padding: 0.25rem;
-      gap: 0.25rem;
-    }
-    .tab-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-family: inherit;
-      font-size: 0.78rem;
-      font-weight: 700;
-      padding: 0.35rem 0.8rem;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .tab-btn.active {
-      background: var(--accent);
-      color: #090d16;
-    }
-
-    /* Result Display Frame with Image + Inline Fallback */
     .result-frame {
       width: 100%;
       border-radius: 12px;
@@ -288,8 +177,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 280px;
-      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+      min-height: 240px;
+      margin-bottom: 1.5rem;
     }
     .result-frame img {
       width: 100%;
@@ -307,63 +196,29 @@
       height: auto;
       display: block;
     }
-    .telemetry-view {
-      width: 100%;
-      background: #060910;
-      padding: 1.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      color: #93c5fd;
-      border-radius: 12px;
-      display: none;
-      white-space: pre-wrap;
-      overflow-x: auto;
-    }
 
-    /* KPIs Grid */
-    .kpis-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.25rem;
-      margin-top: 1.5rem;
-    }
-    .kpi-card {
-      background: #0c121e;
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 1.25rem;
-      text-align: center;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .kpi-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-    .kpi-val {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #fff;
-      font-family: 'JetBrains Mono', monospace;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.25rem;
-    }
-    .kpi-label {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    /* Footer */
     footer {
       text-align: center;
-      padding: 2rem 0;
+      padding: 2.5rem 0 1rem 0;
       border-top: 1px solid var(--card-border);
       color: var(--text-muted);
       font-size: 0.85rem;
     }
     footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    
+    .kanban-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; margin-top: 1.25rem; }
+    .kanban-col { background: #080c14; border: 1px solid var(--card-border); border-radius: 12px; padding: 1rem; min-height: 280px; }
+    .col-header { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 0.75rem; border-bottom: 1px solid #1f293d; padding-bottom: 0.5rem; }
+    .deal-card {
+      background: #111827; border: 1px solid #1f293d; border-radius: 8px; padding: 0.9rem; margin-bottom: 0.75rem; cursor: pointer; transition: all 0.2s;
+    }
+    .deal-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .deal-name { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 0.2rem; }
+    .deal-company { font-size: 0.78rem; color: #94a3b8; margin-bottom: 0.5rem; }
+    .deal-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; font-weight: 700; }
+    .deal-val { color: #34d399; font-family: 'JetBrains Mono', monospace; }
+    .advance-btn { background: #1e293b; color: #cbd5e1; border: none; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.7rem; cursor: pointer; }
+    .advance-btn:hover { background: var(--accent); color: #090d16; }
   </style>
 </head>
 <body>
@@ -378,6 +233,9 @@
         <a href="https://github.com/AbishekPranavGV/Crm" target="_blank" class="nav-btn">
           GitHub Repository ↗
         </a>
+        <a href="https://vercel.com/new/clone?repository-url=https://github.com/AbishekPranavGV/Crm" target="_blank" class="nav-btn nav-btn-vercel" title="Deploy directly to Vercel via GitHub">
+          ▲ Deploy to Vercel
+        </a>
         <a href="https://abishekpranavportfolio.lovable.app/" target="_blank" class="nav-btn nav-btn-primary">
           Master Portfolio ↗
         </a>
@@ -388,78 +246,82 @@
     <header>
       <div class="badge">
         <div class="badge-dot"></div>
-        <span>SALES AUTOMATION AI</span>
+        <span>VERCEL-READY SALES ENGINE</span>
       </div>
       <h1>Enterprise AI CRM Skill Bundle</h1>
-      <p class="lead">AI automation workflows for customer relationship management, sales pipeline progression, automated follow-ups, and executive reporting.</p>
+      <p class="lead">Intelligent pipeline automation, lead conversion propensity scoring, and automated client follow-up email generator.</p>
     </header>
-
-    <!-- Interactive Execution Console -->
-    <div class="console-panel">
-      <div class="controls-grid">
-        
-      <div class="control-group">
-        <label>Automation Flow</label>
-        <select class="control-select" id="ctrl-0">
-          <option value="Lead Qualification & Routing">Lead Qualification & Routing</option><option value="Follow-up Cadence Generator">Follow-up Cadence Generator</option><option value="Pipeline Velocity Analytics">Pipeline Velocity Analytics</option>
-        </select>
-      </div>
     
-      <div class="control-group">
-        <label>Integration Tier</label>
-        <select class="control-select" id="ctrl-1">
-          <option value="REST API / Webhooks">REST API / Webhooks</option><option value="OAuth2 CRM Bridge">OAuth2 CRM Bridge</option><option value="Automated Email Sync">Automated Email Sync</option>
-        </select>
-      </div>
-    
-      </div>
 
-      <div class="progress-bar-container" id="progressBar">
-        <div class="progress-bar-fill" id="progressFill"></div>
-      </div>
-
-      <div class="action-row">
-        <button class="run-btn" id="runBtn" onclick="executeLiveSimulation()">
-          <span>▶ Execute Live Run</span>
-        </button>
-
-        <div class="execution-status" id="execStatus">
-          <div class="status-dot"></div>
-          <span id="statusText">System Ready · Standing by for execution</span>
+    <!-- Live Working Application Console -->
+    <div class="app-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <div class="card-title" style="margin-bottom:0;">
+          <span>⚡ Live Sales Pipeline & Automated Follow-Up Assistant</span>
+        </div>
+        <div style="display:flex; gap:1rem; align-items:center;">
+          <div style="font-size:0.9rem; font-weight:700; color:#cbd5e1;">
+            Active ARR: <span id="pipelineTotal" style="color:#34d399; font-family:'JetBrains Mono', monospace;">$164,000</span>
+          </div>
+          <button class="btn-action" style="padding:0.4rem 0.9rem; font-size:0.82rem;" onclick="addLead()">+ Add Lead</button>
         </div>
       </div>
 
-      <!-- Telemetry Output Stream -->
-      <div class="terminal-box" id="terminalBox">
-        <div class="log-line">
-          <span class="log-time">[STANDBY]</span> Engine primed. Click 'Execute Live Run' to trigger operational pipeline.
+      <!-- Kanban Columns -->
+      <div class="kanban-grid" id="kanbanGrid">
+        <div class="kanban-col" id="col-new">
+          <div class="col-header"><span>New Leads</span> <span id="cnt-new">2</span></div>
+          <div class="deal-list" id="list-new"></div>
+        </div>
+        <div class="kanban-col" id="col-qual">
+          <div class="col-header"><span>Qualified</span> <span id="cnt-qual">2</span></div>
+          <div class="deal-list" id="list-qual"></div>
+        </div>
+        <div class="kanban-col" id="col-prop">
+          <div class="col-header"><span>Proposal</span> <span id="cnt-prop">1</span></div>
+          <div class="deal-list" id="list-prop"></div>
+        </div>
+        <div class="kanban-col" id="col-won">
+          <div class="col-header"><span>Closed Won</span> <span id="cnt-won">1</span></div>
+          <div class="deal-list" id="list-won"></div>
+        </div>
+      </div>
+
+      <!-- AI Email Assistant Box -->
+      <div style="background:#080c14; border:1px solid #1f293d; border-radius:12px; padding:1.25rem; margin-top:1.5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+          <span style="font-size:0.95rem; font-weight:800; color:#fff;">✉️ Instant AI Follow-Up Generator</span>
+          <span style="font-size:0.75rem; color:#34d399; font-weight:700;" id="aiPropensityBadge">Selected: Apex Health Labs (Propensity: 88%)</span>
+        </div>
+        <div id="aiEmailText" style="font-size:0.85rem; color:#cbd5e1; background:#0d131f; border:1px solid #1f293d; border-radius:8px; padding:0.9rem; font-family:'JetBrains Mono', monospace; white-space:pre-wrap;">
+Hi Marcus,
+
+Following up on our demonstration of the automated instrumentation suite for Apex Health Labs. We've verified your requirements for ISO 13485 compliance and have reserved priority batch allocation for your Q4 schedule.
+
+Please find the executive proposal and tiered quotation attached. Can we lock in a 15-minute verification sync this Thursday at 11:00 AM?
+
+Best regards,
+Abishek Pranav | Enterprise AI Automation Lead
         </div>
       </div>
     </div>
 
+    
     <!-- Live System Result Output Preview -->
-    <div class="result-section">
-      <div class="result-header">
-        <div class="result-title">
-          <span>📊 Live System Result Output</span>
-          <span style="font-size:0.75rem; background:rgba(16,185,129,0.15); color:#34d399; border:1px solid #059669; padding:0.2rem 0.6rem; border-radius:9999px;">
-            VERIFIED 200 OK
-          </span>
-        </div>
-
-        <div class="tab-pills">
-          <button class="tab-btn active" id="tabVisual" onclick="switchTab('visual')">Visual Output</button>
-          <button class="tab-btn" id="tabTelemetry" onclick="switchTab('telemetry')">Telemetry JSON</button>
-        </div>
+    <div class="app-card">
+      <div class="card-title">
+        <span>📊 Verified System Architecture & Output Preview</span>
+        <span style="font-size:0.75rem; background:rgba(16,185,129,0.15); color:#34d399; border:1px solid #059669; padding:0.2rem 0.6rem; border-radius:9999px;">
+          VERIFIED 200 OK
+        </span>
       </div>
 
-      <!-- Display Frame: Image with automatic inline fallback -->
-      <div class="result-frame" id="visualContainer">
+      <div class="result-frame">
         <img 
           src="result_preview.svg" 
-          alt="Enterprise AI CRM Skill Bundle Verified Result Output" 
+          alt="Crm Verified Result Output" 
           id="resultImg"
-          onerror="handleImageFallback()" 
+          onerror="this.style.display='none'; document.getElementById('inlineSvgFallback').style.display='block';" 
         />
         <div class="inline-svg-wrap" id="inlineSvgFallback">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 590 340" width="100%" height="100%">
@@ -557,136 +419,89 @@
 </svg>
         </div>
       </div>
-
-      <!-- Telemetry JSON View -->
-      <div class="telemetry-view" id="telemetryContainer">{
-  "repository": "Crm",
-  "environment": "Production Verified GitHub Pages",
-  "ci_cd_status": "Success (200 OK)",
-  "model_architecture": "Enterprise AI CRM Skill Bundle",
-  "runtime_latency": "24.8ms",
-  "memory_allocation": "14.2 MB",
-  "metrics": {
-    "Pipeline Automation": "100%",
-    "Lead Response Speed": "3.2x",
-    "Continuous Monitoring": "24/7"
-  }
-}</div>
-
-      <!-- KPI Metrics Row -->
-      <div class="kpis-grid">
-        
-      <div class="kpi-card">
-        <div class="kpi-val" id="kpi-val-0">100%</div>
-        <div class="kpi-label">Pipeline Automation</div>
-      </div>
-    
-      <div class="kpi-card">
-        <div class="kpi-val" id="kpi-val-1">3.2x</div>
-        <div class="kpi-label">Lead Response Speed</div>
-      </div>
-    
-      <div class="kpi-card">
-        <div class="kpi-val" id="kpi-val-2">24/7</div>
-        <div class="kpi-label">Continuous Monitoring</div>
-      </div>
-    
-      </div>
     </div>
+    
 
-    <!-- Footer -->
     <footer>
       Engineered by <a href="https://abishekpranavportfolio.lovable.app/" target="_blank">Abishek Pranav G V</a> · Business Analyst & Data/AI Automation Specialist
     </footer>
-
   </div>
 
   <script>
-    const execSteps = ["[LEADS] Scanning inbound leads across CRM webhook queue...", "[AI SCORE] Evaluating conversion propensity score (0.84 high-value)...", "[DISPATCH] Generating tailored B2B outreach draft and alerting account exec...", "[SUCCESS] CRM deal stage automated."];
-    let isRunning = false;
+    let deals = [
+      { id: 1, name: "Apex Health Labs", company: "Medical Instrumentation", val: 42000, stage: "prop", score: 88 },
+      { id: 2, name: "Nippon Petrochemicals", company: "Process Monitoring", val: 68000, stage: "qual", score: 74 },
+      { id: 3, name: "Lanka Port Authority", company: "Logistics Telemetry", val: 34000, stage: "won", score: 96 },
+      { id: 4, name: "Foundry Patterns", company: "Industrial Tooling", val: 12000, stage: "new", score: 62 },
+      { id: 5, name: "Greenwich Freight", company: "Supply Chain", val: 28000, stage: "qual", score: 81 },
+      { id: 6, name: "BioGen Instruments", company: "Diagnostics", val: 18000, stage: "new", score: 55 }
+    ];
 
-    function handleImageFallback() {
-      console.warn("External SVG load triggered fallback. Rendering inline SVG seamlessly.");
-      const img = document.getElementById("resultImg");
-      const fallback = document.getElementById("inlineSvgFallback");
-      if (img) img.style.display = "none";
-      if (fallback) fallback.style.display = "block";
-    }
+    const stages = ["new", "qual", "prop", "won"];
 
-    function switchTab(mode) {
-      const visual = document.getElementById("visualContainer");
-      const telemetry = document.getElementById("telemetryContainer");
-      const tabV = document.getElementById("tabVisual");
-      const tabT = document.getElementById("tabTelemetry");
-
-      if (mode === "visual") {
-        visual.style.display = "flex";
-        telemetry.style.display = "none";
-        tabV.classList.add("active");
-        tabT.classList.remove("active");
-      } else {
-        visual.style.display = "none";
-        telemetry.style.display = "block";
-        tabV.classList.remove("active");
-        tabT.classList.add("active");
+    function advanceDeal(id, e) {
+      e.stopPropagation();
+      const d = deals.find(item => item.id === id);
+      if (d) {
+        const currIdx = stages.indexOf(d.stage);
+        if (currIdx < stages.length - 1) {
+          d.stage = stages[currIdx + 1];
+          renderDeals();
+        }
       }
     }
 
-    function getTime() {
-      const d = new Date();
-      return '[' + d.toTimeString().split(' ')[0] + '.' + String(d.getMilliseconds()).padStart(3, '0') + ']';
+    function selectDeal(d) {
+      document.getElementById("aiPropensityBadge").innerText = `Selected: ${d.name} (Propensity: ${d.score}%)`;
+      document.getElementById("aiEmailText").innerText = `Hi Team at ${d.name},\n\nFollowing up regarding our enterprise automation integration for ${d.company}. With your pipeline deal valued at $${d.val.toLocaleString()}, we have pre-configured your dedicated staging environment.\n\nWould you be open to reviewing the rollout milestone plan this week?\n\nBest regards,\nAbishek Pranav | Business Automation Specialist`;
     }
 
-    function executeLiveSimulation() {
-      if (isRunning) return;
-      isRunning = true;
-
-      const btn = document.getElementById("runBtn");
-      const statusText = document.getElementById("statusText");
-      const progressBar = document.getElementById("progressBar");
-      const progressFill = document.getElementById("progressFill");
-      const term = document.getElementById("terminalBox");
-
-      btn.disabled = true;
-      btn.innerHTML = '<span>⚡ Executing Pipeline...</span>';
-      statusText.innerText = "Running inference telemetry across cluster...";
-      progressBar.style.display = "block";
-      progressFill.style.width = "0%";
-      term.innerHTML = "";
-
-      let stepIdx = 0;
-      const totalSteps = execSteps.length;
-
-      const interval = setInterval(() => {
-        if (stepIdx < totalSteps) {
-          const pct = Math.round(((stepIdx + 1) / totalSteps) * 100);
-          progressFill.style.width = pct + "%";
-
-          const line = document.createElement("div");
-          line.className = "log-line";
-          line.innerHTML = '<span class="log-time">' + getTime() + '</span> ' + execSteps[stepIdx];
-          term.appendChild(line);
-          term.scrollTop = term.scrollHeight;
-
-          stepIdx++;
-        } else {
-          clearInterval(interval);
-          progressFill.style.width = "100%";
-          setTimeout(() => {
-            const finishLine = document.createElement("div");
-            finishLine.className = "log-line log-ok";
-            finishLine.innerHTML = '<span class="log-time">' + getTime() + '</span> [SUCCESS] Live run complete · All parameters converged (200 OK)';
-            term.appendChild(finishLine);
-            term.scrollTop = term.scrollHeight;
-
-            statusText.innerText = "Execution successful (200 OK) · Result preview refreshed";
-            btn.disabled = false;
-            btn.innerHTML = '<span>✓ Live Run Complete</span>';
-            isRunning = false;
-          }, 300);
-        }
-      }, 400);
+    function addLead() {
+      const name = prompt("Enter Client / Company Name:", "Orbital Tech Systems");
+      if (!name) return;
+      const val = parseInt(prompt("Enter Deal Value ($):", "25000")) || 20000;
+      deals.push({
+        id: Date.now(),
+        name: name,
+        company: "Enterprise Technology",
+        val: val,
+        stage: "new",
+        score: Math.floor(Math.random() * 30) + 65
+      });
+      renderDeals();
     }
+
+    function renderDeals() {
+      stages.forEach(st => {
+        document.getElementById("list-" + st).innerHTML = "";
+      });
+
+      let total = 0;
+      deals.forEach(d => {
+        total += d.val;
+        const card = document.createElement("div");
+        card.className = "deal-card";
+        card.onclick = () => selectDeal(d);
+        const canAdvance = d.stage !== "won";
+        card.innerHTML = `
+          <div class="deal-name">${d.name}</div>
+          <div class="deal-company">${d.company} · <span style="color:#38bdf8;">${d.score}% Fit</span></div>
+          <div class="deal-footer">
+            <span class="deal-val">$${d.val.toLocaleString()}</span>
+            ${canAdvance ? `<button class="advance-btn" onclick="advanceDeal(${d.id}, event)">Next →</button>` : `<span style="color:#34d399; font-size:0.75rem;">✓ Won</span>`}
+          </div>
+        `;
+        document.getElementById("list-" + d.stage).appendChild(card);
+      });
+
+      stages.forEach(st => {
+        document.getElementById("cnt-" + st).innerText = deals.filter(d => d.stage === st).length;
+      });
+
+      document.getElementById("pipelineTotal").innerText = "$" + total.toLocaleString();
+    }
+
+    window.onload = renderDeals;
   </script>
 </body>
 </html>
