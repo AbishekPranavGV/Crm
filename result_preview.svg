@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 590 340" width="100%" height="100%">
   <defs>
     <linearGradient id="bg_crm" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -44,7 +45,7 @@
 
   <!-- Subtitle -->
   <text x="24" y="60" fill="#f3f4f6" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="700">Enterprise AI CRM Skill Bundle</text>
-  <text x="24" y="76" fill="#9ca3af" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10.5">Conversational deal pipelines, automated logging & lead scoring</text>
+  <text x="24" y="76" fill="#9ca3af" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10.5">Conversational deal pipelines, automated logging &amp; lead scoring</text>
 
   <!-- Visual Canvas -->
   <g transform="translate(24, 90)">
