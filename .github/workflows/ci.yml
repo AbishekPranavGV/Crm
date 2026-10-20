@@ -1,0 +1,23 @@
+name: CI CRM Build & Skill Bundle Validation
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify CRM Bundles & Scripts
+        run: |
+          python -c "
+          import os, zipfile, glob
+          zips = glob.glob('*.zip')
+          for z in zips:
+              with zipfile.ZipFile(z, 'r') as zf:
+                  print(f'Verified CRM package {z} with {len(zf.namelist())} files')
+          assert os.path.exists('build_crm_preview.bat'), 'Preview script missing'
+          print('CRM preview automation scripts verified successfully!')
+          "
